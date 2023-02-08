@@ -1,0 +1,1 @@
+# Aplikacja wyświetla kursy kryptowalut

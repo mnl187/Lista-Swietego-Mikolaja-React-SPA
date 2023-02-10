@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {GiftsList} from "./components/gifts/GiftsList";
+import {GiftsList} from "./components/Gifts/GiftsList";
 
 export const App = () => {
     return (

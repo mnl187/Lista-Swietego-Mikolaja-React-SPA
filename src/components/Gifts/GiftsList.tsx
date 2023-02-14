@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
-import {GiftEntity} from "../../types/gift";
 import {GiftsTable} from "./GiftsTable";
+import {GiftEntity} from 'types';
 
 export const GiftsList = () => {
     const [giftsList, setGiftsList] = useState<GiftEntity[] | null>(null);

@@ -3,6 +3,7 @@ import {GiftEntity} from "types";
 
 interface Props {
     gift: GiftEntity;
+    onGiftsChange: () => void;
 }
 
 export const GiftTableRow = (props: Props) => {
@@ -10,7 +11,7 @@ export const GiftTableRow = (props: Props) => {
     e.preventDefault()
 
         if (!window.confirm(`Are you sure you want to remove ${props.gift.name}`)) {
-            return
+            return;
         }
 
         const res = await fetch(`http://localhost:3001/gift/${props.gift.id}`, {
@@ -20,7 +21,10 @@ export const GiftTableRow = (props: Props) => {
         if (res.status === 400 || res.status === 500) {
             const error = await res.json();
             alert(`Error occurred: ${error.message}`);
+            return;
         }
+
+        props.onGiftsChange()
     };
 
     return (

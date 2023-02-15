@@ -13,10 +13,16 @@ export const GiftTableRow = (props: Props) => {
             return
         }
 
-        await fetch(`http://localhost:3001/gift/${props.gift.id}`, {
+        const res = await fetch(`http://localhost:3001/gift/${props.gift.id}`, {
             method: 'DELETE'
-        })
-    }
+        });
+
+        if (res.status === 400 || res.status === 500) {
+            const error = await res.json();
+            alert(`Error occurred: ${error.message}`);
+        }
+    };
+
     return (
         <tr>
             <th>{props.gift.id}</th>

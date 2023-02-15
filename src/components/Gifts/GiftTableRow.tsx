@@ -6,12 +6,16 @@ interface Props {
 }
 
 export const GiftTableRow = (props: Props) => {
-    const deleteGift = (e: MouseEvent) => {
+    const deleteGift = async (e: MouseEvent) => {
     e.preventDefault()
 
         if (!window.confirm(`Are you sure you want to remove ${props.gift.name}`)) {
             return
         }
+
+        await fetch(`http://localhost:3001/gift/${props.gift.id}`, {
+            method: 'DELETE'
+        })
     }
     return (
         <tr>

@@ -7,12 +7,18 @@ export const AddGift = () => {
         count: 0,
     });
 
+    const [loading, setLoading] = useState<boolean>(false);
+
     const updateForm = (key: string, value: any) => {
         setForm(form => ({
             ...form,
            [key]: value,
         }));
     };
+
+    if (loading) {
+        return <p>Loading...</p>
+    }
     
     return <form>
         <h2>Add Gift</h2>
@@ -30,7 +36,7 @@ export const AddGift = () => {
             <label>
                 Count <br/>
                 <input type="number"
-                       value={form.name}
+                       value={form.count}
                        onChange={e  => updateForm('count', Number(e.target.value))}/>
             </label>
         </p>

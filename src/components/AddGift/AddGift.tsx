@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
+import React, {FormEvent, useState} from 'react';
 import { CreateGiftReq } from 'types';
+import {Spinner} from "../common/Spinner/Spinner";
 
 export const AddGift = () => {
     const [form, setForm] = useState<CreateGiftReq>({
@@ -16,11 +17,25 @@ export const AddGift = () => {
         }));
     };
 
+    const sendForm = async (e: FormEvent) => {
+        e.preventDefault();
+
+        setLoading(true);
+
+        const res = await fetch(`http://localhost:3001/gift`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(form)
+        })
+    }
+
     if (loading) {
-        return <p>Loading...</p>
+        return <Spinner/>
     }
     
-    return <form>
+    return <form onSubmit={sendForm}>
         <h2>Add Gift</h2>
         <p>
 
@@ -40,6 +55,6 @@ export const AddGift = () => {
                        onChange={e  => updateForm('count', Number(e.target.value))}/>
             </label>
         </p>
-        <button>Add</button>
+        <button type="submit">Add</button>
     </form>
 };

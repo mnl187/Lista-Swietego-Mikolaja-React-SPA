@@ -1,5 +1,5 @@
 import React, {FormEvent, useState} from 'react';
-import { CreateGiftReq } from 'types';
+import { CreateGiftReq, GiftEntity } from 'types';
 import {Spinner} from "../common/Spinner/Spinner";
 
 export const AddGift = () => {
@@ -9,6 +9,7 @@ export const AddGift = () => {
     });
 
     const [loading, setLoading] = useState<boolean>(false);
+    const [resultInfo, setResultInfo] = useState<string | null>(null)
 
     const updateForm = (key: string, value: any) => {
         setForm(form => ({
@@ -27,14 +28,22 @@ export const AddGift = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(form)
-        })
-    }
+            body: JSON.stringify(form),
+        });
+        const data: GiftEntity = await res.json();
+
+        setLoading(false);
+        setResultInfo(`${data.name} added with ID ${data.id}`);
+    };
 
     if (loading) {
         return <Spinner/>
     }
-    
+
+if (resultInfo !== null) {
+    return <p><strong>{resultInfo}</strong></p>
+}
+
     return <form onSubmit={sendForm}>
         <h2>Add Gift</h2>
         <p>

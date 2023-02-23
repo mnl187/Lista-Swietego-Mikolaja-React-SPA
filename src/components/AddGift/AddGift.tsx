@@ -72,3 +72,4 @@ export const AddGift = () => {
             <button type="submit">Add</button>
         </form>
     };
+}

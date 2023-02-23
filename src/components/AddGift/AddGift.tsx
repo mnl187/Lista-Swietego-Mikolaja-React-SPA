@@ -41,7 +41,10 @@ export const AddGift = () => {
     }
 
 if (resultInfo !== null) {
-    return <p><strong>{resultInfo}</strong></p>
+    return <div>
+        <p><strong>{resultInfo}</strong></p>
+        <button onClick={() => setResultInfo(null)}>Add another on</button>
+    </div>
 }
 
     return <form onSubmit={sendForm}>

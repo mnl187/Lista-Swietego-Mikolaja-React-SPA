@@ -20,7 +20,11 @@ export const ChildrenTable = (props: Props) => (
         <tbody>
         {
             props.childrenList.map(child => (
-                <ChildrenTableRow gift={gift} key={gift.id} onGiftsChange={props.onGiftsChange}/>
+                <ChildrenTableRow
+                key={child.id}
+                child={child}
+                giftsList={props.giftsList}
+                />
             ))
         }
         </tbody>

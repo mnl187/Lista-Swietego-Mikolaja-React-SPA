@@ -7,7 +7,7 @@ interface Props {
     onGiftsChange: () => void;
 }
 
-export const ChilldrenTableRow = (props: Props) => {
+export const ChildrenTableRow = (props: Props) => {
     const deleteGift = async (e: MouseEvent) => {
     e.preventDefault()
 

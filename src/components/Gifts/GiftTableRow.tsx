@@ -1,5 +1,6 @@
 import React from "react";
 import {GiftEntity} from "types";
+import {Link} from "react-router-dom";
 
 interface Props {
     gift: GiftEntity;
@@ -29,7 +30,9 @@ export const GiftTableRow = (props: Props) => {
 
     return (
         <tr>
-            <th>{props.gift.id}</th>
+            <td>
+            <Link to={`/gift/${props.gift.id}`}>{props.gift.id}</Link>
+            </td>
             <td>{props.gift.name}</td>
             <td>{props.gift.count}</td>
             <td>

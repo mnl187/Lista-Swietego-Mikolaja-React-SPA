@@ -1,11 +1,11 @@
 import React, {FormEvent, useState} from 'react';
-import {CreateGiftReq, GiftEntity} from 'types';
+import {ChildEntity, CreateChildReq, CreateGiftReq, GiftEntity} from 'types';
 import {Spinner} from "../common/Spinner/Spinner";
 
 export const AddChild = () => {
-    const [form, setForm] = useState<CreateGiftReq>({
+    const [form, setForm] = useState<CreateChildReq>({
         name: '',
-        count: 0,
+        giftId: '',
     });
 
     const [loading, setLoading] = useState<boolean>(false);
@@ -24,16 +24,16 @@ export const AddChild = () => {
         setLoading(true);
 
         try {
-            const res = await fetch(`http://localhost:3001/gift`, {
+            const res = await fetch(`http://localhost:3001/child`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify(form),
             });
-            const data: GiftEntity = await res.json();
+            const data: ChildEntity = await res.json();
 
-            setResultInfo(`${data.name} added with ID ${data.id}`);
+            setResultInfo(`${data.name} has been created on Santa's list`);
         } finally {
             setLoading(false);
         }
@@ -50,7 +50,7 @@ export const AddChild = () => {
         }
 
         return <form onSubmit={sendForm}>
-            <h2>Add Gift</h2>
+            <h2>Add child</h2>
             <p>
 
                 <label>
@@ -65,7 +65,7 @@ export const AddChild = () => {
                 <label>
                     Count <br/>
                     <input type="number"
-                           value={form.count}
+                           value={form.name}
                            onChange={e => updateForm('count', Number(e.target.value))}/>
                 </label>
             </p>

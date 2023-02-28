@@ -1,6 +1,7 @@
 import React from "react";
 import {ChildEntity, GiftEntity} from "types";
 import {Link} from "react-router-dom";
+import {ChildGiftSelect} from "../ChildGiftSelect";
 
 interface Props {
     child: ChildEntity;
@@ -13,7 +14,12 @@ export const ChildrenTableRow = (props: Props) => {
             <th>
                 {props.child.name}
             </th>
-            <td>{props.child.gittId}</td>
+            <td>
+                <ChildGiftSelect
+                    giftsList={props.giftsList}
+                    selectedId={props.child.giftId}
+                />
+            </td>
         </tr>
     )
 }

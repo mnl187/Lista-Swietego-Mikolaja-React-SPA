@@ -1,6 +1,5 @@
 import React, {useState} from "react";
 import { GiftEntity } from "types";
-import {selectOptions} from "@testing-library/user-event/dist/select-options";
 
 interface Props {
     giftsList: GiftEntity[];

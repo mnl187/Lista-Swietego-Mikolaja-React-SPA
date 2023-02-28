@@ -1,21 +1,36 @@
-import React, {useState} from "react";
-import { GiftEntity } from "types";
+import React, {FormEvent, useState} from "react";
+import {GiftEntity, SetGiftForChildReq} from "types";
 
 interface Props {
     giftsList: GiftEntity[];
-    selectedId:  string;
+    selectedId: string;
+    childId: string;
 }
 
 export const ChildGiftSelect = (props: Props) => {
     const [selected, setSelected] = useState<string>(props.selectedId);
 
-return <select value={selected} onChange={e => setSelected(e.target.value)}>
-    {
-        props.giftsList.map(gift => (
-            <option key={gift.id} value={gift.id}>{gift.name}</option>
-            )
-        )
+    const sendForm = async (e: FormEvent) => {
+        e.preventDefault();
+
+        await fetch(`http://localhost:3001/child/gift/${props.childId}`, {
+            method: 'PATCH',
+            body: JSON.stringify({
+                giftId: selected,
+            } as SetGiftForChildReq)
+        })
     }
 
-</select>
+    return <form onSubmit={sendForm}>
+        <select value={selected} onChange={e => setSelected(e.target.value)}>
+            {
+                props.giftsList.map(gift => (
+                        <option key={gift.id} value={gift.id}>{gift.name}</option>
+                    )
+                )
+            }
+
+        </select>
+        <button type="submit">Save</button>
+    </form>
 }

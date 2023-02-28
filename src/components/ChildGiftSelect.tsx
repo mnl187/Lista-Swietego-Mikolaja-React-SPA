@@ -15,6 +15,9 @@ export const ChildGiftSelect = (props: Props) => {
 
         await fetch(`http://localhost:3001/child/gift/${props.childId}`, {
             method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
             body: JSON.stringify({
                 giftId: selected,
             } as SetGiftForChildReq)
